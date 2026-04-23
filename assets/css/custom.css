@@ -1,0 +1,46 @@
+/*in order to call font in csss we font_face*/
+@font-face {
+    font-family:"Roboto" ;
+    src: url(../FONT/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
+
+}
+@font-face {
+    font-family:"Koulen" ;
+    src: url(../FONT/Koulen/Koulen-Regular.ttf);
+  
+    
+}
+@font-face {
+    font-family:"Hanuman" ;
+    src: url(../FONT/Hanuman/Hanuman-VariableFont_wght.ttf);
+}
+body{
+    font-family: "Kolen","Roboto";
+    
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-family: "Kolen","hanuman";
+
+}
+a.nav-link,.nav-link .active, .nav-link{
+    font-family: "kolen","Roboto,Hunuman"!important;
+
+}
+a.nav-link{
+    color: rgb(58, 189, 41);
+
+}
+a.nav-link{
+    color: rgb(11, 13, 10);
+}
+a.nav-link:hover,
+a.nav-link.active{
+
+    color: rgb(184, 48, 125) !important;
+
+}
