@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping</title>
+
+<link rel="stylesheet" href="./assets/css/bootstrap.css">
+<link rel="stylesheet" href="./assets/css/custom.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+.card { transition: 0.3s; border-radius: 12px; }
+.card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgb(209, 61, 61); }
+.card img { transition: 0.4s; }
+.card:hover img { transform: scale(1.1); }
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<div class="container-fluid">
+<a class="navbar-brand" href="./index2.html">
+<img src="./assets/PICTURE/image.png" width="120px">
+</a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item"><a class="nav-link" href="./index2.html">ទំព័រដើម</a></li>
+<li class="nav-item"><a class="nav-link" href="./category.html">ប្រភេទទំនិញ</a></li>
+<li class="nav-item"><a class="nav-link" href="./about.html">អំពី</a></li>
+<li class="nav-item"><a class="nav-link" href="./contact.html">អំពីពួកយើង</a></li>
+
+</ul>
+
+<div class="d-flex ms-auto">
+<button class="btn btn-outline-dark me-2" onclick="showCart()">
+🛒 (<span id="cart-count">0</span>)
+</button>
+
+<form class="d-flex">
+<input class="form-control me-2" type="search" placeholder="Search">
+<button class="btn btn-outline-success">Search</button>
+</form>
+</div>
+
+</div>
+</div>
+</nav>
+
+<!-- Carousel -->
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+<div class="carousel-inner">
+<div class="carousel-item active">
+<img src="./assets/BANNER/at.png" class="d-block w-100">
+</div>
+<div class="carousel-item">
+<img src="./assets/BANNER/Untitled design (1).png" class="d-block w-100">
+</div>
+<div class="carousel-item">
+<img src="./assets/BANNER/Untitled design.png" class="d-block w-100">
+</div>
+</div>
+</div>
+
+</header>
+
+<!-- ===== PRODUCTS ===== -->
+<div class="content">
+<div class="container mt-5">
+<div class="row">
+
+<h1>ប្រភេទទំនិញ</h1>
+
+<!-- Product -->
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/download (1).jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 1</h5>
+<p class="text-success">$10</p>
+<button class="btn btn-primary" onclick="addToCart('Product 1',10)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/download (2).jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 2</h5>
+<p class="text-success">$15</p>
+<button class="btn btn-primary" onclick="addToCart('Product 2',15)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/STREADWEAR.jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 3</h5>
+<p class="text-success">$20</p>
+<button class="btn btn-primary" onclick="addToCart('Product 3',20)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div class="content">
+<div class="container mt-5">
+<div class="row">
+
+<h1>លក់ដាច់បំផុត</h1>
+
+<!-- Product -->
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/download (1).jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 1</h5>
+<p class="text-success">$10</p>
+<button class="btn btn-primary" onclick="addToCart('Product 1',10)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/download (2).jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 2</h5>
+<p class="text-success">$15</p>
+<button class="btn btn-primary" onclick="addToCart('Product 2',15)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/STREADWEAR.jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 3</h5>
+<p class="text-success">$20</p>
+<button class="btn btn-primary" onclick="addToCart('Product 3',20)">Add to Cart</button>
+
+</div>
+</div>
+</div>
+<div class="content">
+<div class="container mt-5">
+<div class="row">
+<!-- Product -->
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/download (1).jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 1</h5>
+<p class="text-success">$10</p>
+<button class="btn btn-primary" onclick="addToCart('Product 1',10)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/download (2).jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 2</h5>
+<p class="text-success">$15</p>
+<button class="btn btn-primary" onclick="addToCart('Product 2',15)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card shadow-sm">
+<img src="./assets/catetrogry/STREADWEAR.jpg" class="card-img-top">
+<div class="card-body text-center">
+<h5>Product 3</h5>
+<p class="text-success">$20</p>
+<button class="btn btn-primary" onclick="addToCart('Product 3',20)">Add to Cart</button>
+
+</div>
+</div>
+</div>
+<!-- ===== CART ===== -->
+<div id="cart" style="display:none;" class="container mt-5">
+<h2 class="text-center text-danger">Shopping Cart</h2>
+
+<table class="table">
+<thead>
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="cart-items"></tbody>
+</table>
+
+<h4>Total: $<span id="total-price">0</span></h4>
+
+<button class="btn btn-secondary" onclick="showProducts()">Back</button>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-dark text-white mt-5 p-4 text-center">
+<p>© 2026 Shopping Website</p>
+</footer>
+
+<script src="./assets/js/bootstrap.bundle.min.js"></script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price){
+    let item = cart.find(p => p.name === name);
+    if(item){ item.qty++; }
+    else{ cart.push({name, price, qty:1}); }
+    saveCart();
+}
+
+function saveCart(){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart(){
+    let cartItems = document.getElementById("cart-items");
+    let total = 0, count = 0;
+    cartItems.innerHTML = "";
+
+    cart.forEach((item, i) => {
+        cartItems.innerHTML += `
+        <tr>
+            <td>${item.name}</td>
+            <td>$${item.price}</td>
+            <td>
+                <button onclick="decrease(${i})">-</button>
+                ${item.qty}
+                <button onclick="increase(${i})">+</button>
+            </td>
+            <td>$${item.price * item.qty}</td>
+            <td><button onclick="removeItem(${i})">X</button></td>
+        </tr>`;
+        total += item.price * item.qty;
+        count += item.qty;
+    });
+
+    document.getElementById("total-price").innerText = total;
+    document.getElementById("cart-count").innerText = count;
+}
+
+function increase(i){ cart[i].qty++; saveCart(); }
+
+function decrease(i){
+    if(cart[i].qty > 1){ cart[i].qty--; }
+    else{ cart.splice(i,1); }
+    saveCart();
+}
+
+function removeItem(i){
+    cart.splice(i,1);
+    saveCart();
+}
+
+function showCart(){
+    document.querySelector(".content").style.display="none";
+    document.getElementById("cart").style.display="block";
+}
+
+function showProducts(){
+    document.querySelector(".content").style.display="block";
+    document.getElementById("cart").style.display="none";
+}
+
+updateCart();
+</script>
+
+
+</body>
+</html>
