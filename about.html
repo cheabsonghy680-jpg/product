@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping</title>
+
+<link rel="stylesheet" href="./assets/css/bootstrap.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+.card {
+    transition: 0.3s;
+    border-radius: 12px;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgb(209, 61, 61);
+}
+.card img {
+    transition: 0.4s;
+}
+.card:hover img {
+    transform: scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg bg-light">
+<div class="container-fluid">
+
+<a class="navbar-brand">SHOP</a>
+
+<button class="btn btn-dark" onclick="showCart()">
+🛒 (<span id="cart-count">0</span>)
+</button>
+
+</div>
+</nav>
+
+<!-- ===== PRODUCTS ===== -->
+<div class="container mt-5" id="products">
+
+<div class="row">
+
+<div class="col-md-4">
+<div class="card p-2">
+<img src="./assets/catetrogry/download (1).jpg" class="img-fluid">
+<h5>Product 1</h5>
+<p>$10</p>
+<button class="btn btn-primary" onclick="addToCart('Product 1',10)">Add</button>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-2">
+<img src="./assets/catetrogry/download (2).jpg" class="img-fluid">
+<h5>Product 2</h5>
+<p>$15</p>
+<button class="btn btn-primary" onclick="addToCart('Product 2',15)">Add</button>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-2">
+<img src="./assets/catetrogry/STREADWEAR.jpg" class="img-fluid">
+<h5>Product 3</h5>
+<p>$20</p>
+<button class="btn btn-primary" onclick="addToCart('Product 3',20)">Add</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== CART ===== -->
+<div class="container mt-5" id="cart" style="display:none;">
+
+<h2>Shopping Cart</h2>
+
+<table class="table">
+<thead>
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="cart-items"></tbody>
+</table>
+
+<h3>Total: $<span id="total-price">0</span></h3>
+
+<button class="btn btn-secondary" onclick="showProducts()">Back</button>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-dark text-white text-center p-3 mt-5">
+© 2026 Shopping Website
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price){
+    let item = cart.find(p => p.name === name);
+    if(item){
+        item.qty++;
+    } else {
+        cart.push({name, price, qty:1});
+    }
+    saveCart();
+}
+
+function saveCart(){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart(){
+    let table = document.getElementById("cart-items");
+    let total = 0;
+    let count = 0;
+
+    table.innerHTML = "";
+
+    cart.forEach((item, i) => {
+        table.innerHTML += `
+        <tr>
+            <td>${item.name}</td>
+            <td>$${item.price}</td>
+            <td>
+                <button onclick="decrease(${i})">-</button>
+                ${item.qty}
+                <button onclick="increase(${i})">+</button>
+            </td>
+            <td>$${item.price * item.qty}</td>
+            <td><button onclick="removeItem(${i})">X</button></td>
+        </tr>
+        `;
+
+        total += item.price * item.qty;
+        count += item.qty;
+    });
+
+    document.getElementById("total-price").innerText = total;
+    document.getElementById("cart-count").innerText = count;
+}
+
+function increase(i){
+    cart[i].qty++;
+    saveCart();
+}
+
+function decrease(i){
+    if(cart[i].qty > 1){
+        cart[i].qty--;
+    } else {
+        cart.splice(i,1);
+    }
+    saveCart();
+}
+
+function removeItem(i){
+    cart.splice(i,1);
+    saveCart();
+}
+
+function showCart(){
+    document.getElementById("products").style.display = "none";
+    document.getElementById("cart").style.display = "block";
+    updateCart();
+}
+
+function showProducts(){
+    document.getElementById("products").style.display = "block";
+    document.getElementById("cart").style.display = "none";
+}
+
+updateCart();
+</script>
+
+</body>
+</html>

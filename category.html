@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category</title>
+
+<link rel="stylesheet" href="./assets/css/bootstrap.css">
+
+<style>
+.card { transition: 0.3s; border-radius: 12px; }
+.card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.card img { height:250px; object-fit:cover; cursor:pointer; }
+</style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<div class="container">
+<a class="navbar-brand" href="./index2.html">wellcome</a>
+<button class="btn btn-outline-light" onclick="showCart()">
+🛒 (<span id="cart-count">0</span>)
+</button>
+</div>
+</nav>
+
+<!-- ===== CATEGORY TITLE ===== -->
+<div class="container mt-4">
+<h2 class="text-center text-primary">Men Category</h2>
+<hr>
+
+<div class="row">
+
+<!-- Product 1 -->
+<div class="col-md-4 mb-4">
+<div class="card">
+<img src="./assets/catetrogry/download (1).jpg"
+onclick="previewProduct('Men Shirt',25,'./assets/catetrogry/download (1).jpg')">
+<div class="card-body text-center">
+<h5>Men Shirt</h5>
+<p class="text-success">$25</p>
+<button class="btn btn-primary"
+onclick="addToCart('Men Shirt',25)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<!-- Product 2 -->
+<div class="col-md-4 mb-4">
+<div class="card">
+<img src="./assets/catetrogry/download (2).jpg"
+onclick="previewProduct('Men Jacket',40,'./assets/catetrogry/download (2).jpg')">
+<div class="card-body text-center">
+<h5>Men Jacket</h5>
+<p class="text-success">$40</p>
+<button class="btn btn-primary"
+onclick="addToCart('Men Jacket',40)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3 -->
+<div class="col-md-4 mb-4">
+<div class="card">
+<img src="./assets/catetrogry/STREADWEAR.jpg"
+onclick="previewProduct('Men Shoes',60,'./assets/catetrogry/STREADWEAR.jpg')">
+<div class="card-body text-center">
+<h5>Men Shoes</h5>
+<p class="text-success">$60</p>
+<button class="btn btn-primary"
+onclick="addToCart('Men Shoes',60)">Add to Cart</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== CART SECTION ===== -->
+<div id="cart" style="display:none;" class="container mt-5">
+<h2>Shopping Cart</h2>
+<table class="table">
+<thead>
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="cart-items"></tbody>
+</table>
+
+<h4>Total: $<span id="total-price">0</span></h4>
+<button class="btn btn-secondary" onclick="showProducts()">Back</button>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal fade" id="productModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <img id="modalImage" class="img-fluid mb-3" style="max-height:350px;">
+        <h4 class="text-success">$<span id="modalPrice"></span></h4>
+        <button class="btn btn-primary mt-3" id="modalAddBtn">Add to Cart</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="./assets/js/bootstrap.bundle.min.js"></script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price){
+    let item = cart.find(p => p.name === name);
+    if(item){ item.qty++; }
+    else{ cart.push({name, price, qty:1}); }
+    saveCart();
+}
+
+function saveCart(){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart(){
+    let cartItems = document.getElementById("cart-items");
+    let total = 0, count = 0;
+    cartItems.innerHTML = "";
+
+    cart.forEach((item, i) => {
+        cartItems.innerHTML += `
+        <tr>
+            <td>${item.name}</td>
+            <td>$${item.price}</td>
+            <td>${item.qty}</td>
+            <td>$${item.price * item.qty}</td>
+            <td><button onclick="removeItem(${i})">X</button></td>
+        </tr>`;
+        total += item.price * item.qty;
+        count += item.qty;
+    });
+
+    document.getElementById("total-price").innerText = total;
+    document.getElementById("cart-count").innerText = count;
+}
+
+function removeItem(i){
+    cart.splice(i,1);
+    saveCart();
+}
+
+function showCart(){
+    document.querySelector(".container.mt-4").style.display="none";
+    document.getElementById("cart").style.display="block";
+}
+
+function showProducts(){
+    document.querySelector(".container.mt-4").style.display="block";
+    document.getElementById("cart").style.display="none";
+}
+
+function previewProduct(name, price, image){
+    document.getElementById("modalTitle").innerText = name;
+    document.getElementById("modalPrice").innerText = price;
+    document.getElementById("modalImage").src = image;
+
+    document.getElementById("modalAddBtn").onclick = function(){
+        addToCart(name, price);
+    };
+
+    let modal = new bootstrap.Modal(document.getElementById('productModal'));
+    modal.show();
+}
+
+updateCart();
+</script>
+
+</body>
+</html>
